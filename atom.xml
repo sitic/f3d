@@ -5,9 +5,9 @@
   <subtitle>A fast and minimalist 3D viewer</subtitle>
   <link href="/F3D/atom.xml" rel="self"/>
   
-  <link href="https://kitware.github.io/F3D/"/>
-  <updated>2020-12-19T16:44:49.038Z</updated>
-  <id>https://kitware.github.io/F3D/</id>
+  <link href="https://f3d-app.github.io/f3d/"/>
+  <updated>2021-11-14T15:52:37.908Z</updated>
+  <id>https://f3d-app.github.io/f3d/</id>
   
   <author>
     <name>Kitware SAS</name>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>Hexo</title>
-    <link href="https://kitware.github.io/F3D/2016/04/29/kw-doc/"/>
-    <id>https://kitware.github.io/F3D/2016/04/29/kw-doc/</id>
+    <link href="https://f3d-app.github.io/f3d/2016/04/29/kw-doc/"/>
+    <id>https://f3d-app.github.io/f3d/2016/04/29/kw-doc/</id>
     <published>2016-04-28T22:00:00.000Z</published>
-    <updated>2020-12-19T16:44:49.038Z</updated>
+    <updated>2021-11-14T15:52:37.908Z</updated>
     
     <content type="html"><![CDATA[<p>Thanks for using kw-doc which is based on Hexo and its template from its own documentation.</p>]]></content>
     

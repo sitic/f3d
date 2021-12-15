@@ -39,17 +39,17 @@
   <!-- RSS -->
   <link rel="alternate" href="/f3d/atom.xml" title="F3D">
   <!-- Open Graph -->
-  <meta name="description" content="F3D can be integrated in the desktop experience in certain cases LinuxDuring installation, F3D will install mime types files as defined by the XDG standard, a .thumbnailer file as specified here and a">
+  <meta name="description" content="F3D can be integrated in the desktop experience. LinuxFor Linux desktop integration, F3D rely on mime types files as defined by the XDG standard, .thumbnailer file as specified here and .desktop file">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Desktop Integration">
 <meta property="og:url" content="https://f3d-app.github.io/f3d/docs/desktop_integration.html">
 <meta property="og:site_name" content="F3D">
-<meta property="og:description" content="F3D can be integrated in the desktop experience in certain cases LinuxDuring installation, F3D will install mime types files as defined by the XDG standard, a .thumbnailer file as specified here and a">
+<meta property="og:description" content="F3D can be integrated in the desktop experience. LinuxFor Linux desktop integration, F3D rely on mime types files as defined by the XDG standard, .thumbnailer file as specified here and .desktop file">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-12-06T09:55:37.071Z">
+<meta property="og:updated_time" content="2021-12-15T21:40:22.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Desktop Integration">
-<meta name="twitter:description" content="F3D can be integrated in the desktop experience in certain cases LinuxDuring installation, F3D will install mime types files as defined by the XDG standard, a .thumbnailer file as specified here and a">
+<meta name="twitter:description" content="F3D can be integrated in the desktop experience. LinuxFor Linux desktop integration, F3D rely on mime types files as defined by the XDG standard, .thumbnailer file as specified here and .desktop file">
   <!-- Google Analytics -->
   
 <script>
@@ -100,13 +100,30 @@
                 <h1 class="article-title" itemprop="name">Desktop Integration</h1>
               </header>
               <div class="article-content" itemprop="articleBody">
-                <p>F3D can be integrated in the desktop experience in certain cases</p>
-<h2 id="Linux" class="article-heading"><a href="#Linux" class="headerlink" title="Linux"></a>Linux<a class="article-anchor" href="#Linux" aria-hidden="true"></a></h2><p>During installation, F3D will install mime types files as defined by the <a href="https://specifications.freedesktop.org/mime-apps-spec/mime-apps-spec-latest.html" target="_blank" rel="noopener">XDG standard</a>, a .thumbnailer file as specified <a href="https://wiki.archlinux.org/title/File_manager_functionality#Thumbnail_previews" target="_blank" rel="noopener">here</a> and a .desktop as specified <a href="https://wiki.archlinux.org/title/desktop_entries" target="_blank" rel="noopener">here</a>. Many file managers use this mechanism, including nautilus, thunar, pcmanfm and caja. Make sure to update the mime types database using <a href="https://linux.die.net/man/1/update-mime-database" target="_blank" rel="noopener">update-mime-database</a> as well as the desktop entries database using <a href="https://linuxcommandlibrary.com/man/update-desktop-database" target="_blank" rel="noopener">update-desktop-database</a>.</p>
-<h2 id="Windows" class="article-heading"><a href="#Windows" class="headerlink" title="Windows"></a>Windows<a class="article-anchor" href="#Windows" aria-hidden="true"></a></h2><p>Using the F3D NSIS installer is the simplest way to enable thumbnails on windows, you can find it in the release section. It will automatically register it when installing F3D and unregister it when uninstalling F3D. It is also possible to manually register it using <code>regsvr32 F3DShellExtension.dll</code>. To unregister it, use <code>regsvr32 /u F3DShellExtension.dll</code>. The NSIS installer also register/unregister extensions support on installation/deinstallation.</p>
+                <p>F3D can be integrated in the desktop experience.</p>
+<h2 id="Linux" class="article-heading"><a href="#Linux" class="headerlink" title="Linux"></a>Linux<a class="article-anchor" href="#Linux" aria-hidden="true"></a></h2><p>For Linux desktop integration, F3D rely on mime types files as defined by the <a href="https://specifications.freedesktop.org/mime-apps-spec/mime-apps-spec-latest.html" target="_blank" rel="noopener">XDG standard</a>, .thumbnailer file as specified <a href="https://wiki.archlinux.org/title/File_manager_functionality#Thumbnail_previews" target="_blank" rel="noopener">here</a> and .desktop file as specified <a href="https://wiki.archlinux.org/title/desktop_entries" target="_blank" rel="noopener">here</a>. Many file managers use this mechanism, including nautilus, thunar, pcmanfm and caja.</p>
+<p>The simplest way to obtain desktop integration on linux is to use a package for your distribution, or the .deb binary package we provide if compatible with your distribution.<br>In other cases, the binary archive can be used like this:</p>
+<ol start="0">
+<li>Make sure ~/.local/bin is part of your PATH</li>
+<li>Extract F3D archive in a TEMP folder</li>
+<li>move $TEMP/config.json to ~/.config/f3d/</li>
+<li>copy $TEMP/* to ~/.local/</li>
+<li>Update your <a href="https://linux.die.net/man/1/update-mime-database" target="_blank" rel="noopener">mime database</a> pointing to ~/.local/share/mime</li>
+<li>Update your <a href="https://linuxcommandlibrary.com/man/update-desktop-database" target="_blank" rel="noopener">desktop database</a> pointing to ~/.local/share/application</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xzvf f3d-1.2.0-Linux.tar.gz</span><br><span class="line"><span class="built_in">cd</span> f3d-1.2.0-Linux</span><br><span class="line">mkdir -p ~/.config/f3d/</span><br><span class="line">mv config.json /.config/f3d/</span><br><span class="line">cp -r ./* ~/.<span class="built_in">local</span>/</span><br><span class="line">sudo update-mime-database ~/.<span class="built_in">local</span>/share/mime/</span><br><span class="line">sudo update-desktop-database ~/.<span class="built_in">local</span>/share/applications</span><br></pre></td></tr></table></figure>
+<p>If you have any issues, read the troubleshooting section.</p>
+<h2 id="Windows" class="article-heading"><a href="#Windows" class="headerlink" title="Windows"></a>Windows<a class="article-anchor" href="#Windows" aria-hidden="true"></a></h2><p>For Windows desktop integration, F3D rely on a registered shell extension.</p>
+<p>Using the F3D NSIS installer (.exe) is the simplest way to enable thumbnails and integrate F3D on windows.</p>
+<p>It is also possible to do it manually when using the zipped binary release, on installation, just run:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd C:\path\to\f3d\bin\</span><br><span class="line">regsvr32 F3DShellExtension.dll</span><br></pre></td></tr></table></figure>
+<p>To remove the shell extension, run:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd C:\path\to\f3d\bin\</span><br><span class="line">regsvr32 /u F3DShellExtension.dll</span><br></pre></td></tr></table></figure>
+<h2 id="MacOS" class="article-heading"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS<a class="article-anchor" href="#MacOS" aria-hidden="true"></a></h2><p>There is no support for thumbnails on MacOS, the .dmg binary release should provide automatic file openings.</p>
 
               </div>
               <footer class="article-footer">
-                <time class="article-footer-updated" datetime="2021-12-06T09:55:37.071Z" itemprop="dateModified">Last updated: 2021-12-06</time>
+                <time class="article-footer-updated" datetime="2021-12-15T21:40:22.681Z" itemprop="dateModified">Last updated: 2021-12-15</time>
                 <a href="configuration_file.html" class="article-footer-prev" title="Configuration file"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="limitations.html" class="article-footer-next" title="Limitations"><span>Next</span><i class="fa fa-chevron-right"></i></a>
               </footer>
               
@@ -115,7 +132,7 @@
           <aside id="article-toc" role="navigation">
             <div id="article-toc-inner">
               <strong class="sidebar-title">Contents</strong>
-              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-text">Windows</span></a></li></ol>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MacOS"><span class="toc-text">MacOS</span></a></li></ol>
               <a href="#" id="article-toc-top">Back to Top</a>
             </div>
           </aside>
@@ -131,7 +148,7 @@
     <footer id="footer" class="wrapper">
   <div class="inner">
     <div id="footer-copyright">
-      &copy; 2021 <a href="https://www.github.com/f3d-app/f3d/" target="_blank">Kitware SAS, Michael Migliore, Mathieu Westphal</a>
+      &copy; 2021 <a href="https://github.com/f3d-app/f3d/" target="_blank">Kitware SAS, Michael Migliore, Mathieu Westphal</a>
     </div>
     <div id="footer-links">
       <a href="https://github.com/f3d-app/f3d" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>

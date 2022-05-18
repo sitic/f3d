@@ -18,7 +18,14 @@ namespace detail
 class window_impl_standard : public window_impl
 {
 public:
-  window_impl_standard(const options& options, bool offscreen);
+  enum class WindowType : unsigned char
+  {
+    NATIVE,
+    NATIVE_OFFSCREEN,
+    EXTERNAL
+  };
+
+  window_impl_standard(const options& options, WindowType type);
   ~window_impl_standard() override;
 
   bool update() override;

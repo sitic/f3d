@@ -1,0 +1,68 @@
+name: python build
+on: [push, pull_request]
+jobs:
+  build-wheels:
+    if: github.event.pull_request.draft == false
+
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ['3.7'] # , '3.8', '3.9', '3.10'
+
+    runs-on: ubuntu-latest
+    container: ghcr.io/f3d-app/f3d-ci
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: 'source'
+        fetch-depth: 0
+        lfs: 'false'
+
+    - name: Set LFS env var
+      working-directory: ${{github.workspace}}/source
+      shell: bash
+      run: echo "LFS_SHA=$(git log -n 1 --pretty=format:%H -- testing/data/ testing/baselines/)" >> $GITHUB_ENV
+
+    - name: Copy LFS Data
+      uses: ./source/.github/actions/lfs-copy
+      with:
+        lfs_sha: ${{env.LFS_SHA}}
+
+    - name: Dependencies Dir
+      working-directory: ${{github.workspace}}
+      run: mkdir dependencies
+
+    - name: Install OCCT dependency
+      uses: ./source/.github/actions/occt-install-dep
+
+    - name: Install Assimp dependency
+      uses: ./source/.github/actions/assimp-install-dep
+
+    - name: Install Imath dependency
+      uses: ./source/.github/actions/imath-install-dep
+
+    - name: Install Alembic dependency
+      uses: ./source/.github/actions/alembic-install-dep
+
+    - name: Install VTK dependency
+      uses: ./source/.github/actions/vtk-install-dep
+      with:
+        vtk_sha_file: ./source/.github/actions/vtk-install-dep/vtk_commit_sha
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    # pwd seems necessary for OpenCASCADE and Assimp for some reasons
+    # coverage build is done in source as it seems to be required for codecov
+    - name: Build
+      working-directory: ${{github.workspace}}/source
+      run: |
+        pip install pytest build
+        python -m build -wheel
+        pip install dist/*.whl
+        pytest

@@ -10,7 +10,7 @@ jobs:
         python-version: ['3.7'] # , '3.8', '3.9', '3.10'
 
     runs-on: ubuntu-latest
-    container: ghcr.io/f3d-app/f3d-ci
+    #container: ghcr.io/f3d-app/f3d-ci
 
     steps:
 
@@ -62,7 +62,8 @@ jobs:
     - name: Build
       working-directory: ${{github.workspace}}/source
       run: |
-        pip install pytest build
+        python --version
+        python -m pip install pytest build
         python -m build -wheel
-        pip install dist/*.whl
-        pytest
+        python -m pip install dist/*.whl
+        python -m pytest
